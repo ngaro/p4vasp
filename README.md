@@ -151,6 +151,17 @@ scripts in the utils directory (`/usr/lib/p4vasp/utils`).
 They are also a good example for the p4vasp-API.
 
 
+
+
+Downloading, installing and running in docker:
+--------------------------
+
+```
+docker run --rm -d -v $HOME/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix:0 -v $HOME/your-p4v-data-dir:/root p4v
+```
+
+In case of a `Can't open display: unix:0` error, run `xhost +`
+
 P4vasp package embeds the odpdom library, that is available also as a [separate
 project](http://sourceforge.net/projects/odpdom) and a slightly modified version
 of the [piddle library](piddle.sourceforge.net).

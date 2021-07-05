@@ -1,13 +1,8 @@
-FROM ubuntu:20.04
-ENV TZ=Europe/Brussels
+FROM ubuntu:18.04
 WORKDIR /root
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get update && apt-get -y install wget make python2 g++ libfltk1.3-dev python2-dev libxrender-dev libxcursor-dev libxinerama-dev unzip libxft-dev && \
-wget https://github.com/ngaro/p4vasp/archive/refs/heads/docker.zip && \
-unzip docker.zip && rm docker.zip && \
-wget http://archive.ubuntu.com/ubuntu/pool/universe/p/pygtk/python-gtk2_2.24.0-5.1ubuntu2_amd64.deb && \
-apt-get -y install ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb && rm ./python-gtk2_2.24.0-5.1ubuntu2_amd64.deb && \
-cd /root/p4vasp-docker && make config && make install && \
-cd /root && rm -rf /root/p4vasp-docker
-WORKDIR /root
+RUN apt-get update && apt-get -y full-upgrade && \
+ apt-get -y install wget unzip make python g++ libfltk1.3-dev python-dev libxrender-dev libxcursor-dev libxft-dev libxinerama-dev python-gtk2 python-numpy python-glade2 && \
+ apt-get autoremove && rm -rf /var/lib/apt/lists/*
+RUN wget https://github.com/ngaro/p4vasp/archive/refs/heads/docker.zip && unzip docker.zip && rm docker.zip
+RUN cd /root/p4vasp-docker && perl -pi -e 's/sudo //g' install.sh && ./install.sh && rm -rf /root/p4vasp-docker
 CMD ["p4v"]
