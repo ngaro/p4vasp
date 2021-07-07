@@ -157,7 +157,7 @@ Downloading, installing and running in docker:
 --------------------------
 
 ```
-docker run --rm -d -v $HOME/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix:0 -v $HOME/your-p4v-data-dir:/root garo/p4v
+docker run --rm -d -v $HOME/.Xauthority:/root/.Xauthority -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix:0 -v $HOME/your-p4v-data-dir:/home/user/p4vdata garo/p4v
 ```
 
 In case of a `Can't open display: unix:0` error, run `xhost +`
